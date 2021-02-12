@@ -59,6 +59,7 @@ class ProductAdmin(admin.ModelAdmin):
     search_fields = ['title', 'new_price', 'detail']
     prepopulated_fields = {'slug': ('title',)}
     inlines = (productImageInline,)
+    save_on_top = True
 
 
 admin.site.register(Product, ProductAdmin)

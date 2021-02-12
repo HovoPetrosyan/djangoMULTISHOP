@@ -43,9 +43,14 @@ INSTALLED_APPS = [
     # Apps
     'EcomApp',
     'Product',
+    'OrderApp',
+    'UserApp',
     # 3rd party
     'mptt',
+    'crispy_forms',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -2968,7 +2968,7 @@ text-align: center;
 /*  03. Home Page Two
 /*----------------------------------------*/
 .li-header-4 {
-	background: #293a6c;
+	background: #1e88e5;
 }
 .li-header-4 .header-top {
 	background: transparent;
@@ -2988,7 +2988,7 @@ text-align: center;
 	background: #ffffff;
 }
 .li-header-4 .header-bottom {
-	background: #293a6c;
+	background: #1976d2;
 	border-top: 1px solid rgba(255,255,255,.1);
 	color: #ffffff;
 }
@@ -4659,7 +4659,7 @@ span.required {
   margin-bottom: 50px;
 }
 .about-image-wrap::after {
-	border: 5px solid #fed700;
+	border: 5px solid rgb(41, 58, 108);
 	content: "";
 	position: absolute;
 	left: 0;

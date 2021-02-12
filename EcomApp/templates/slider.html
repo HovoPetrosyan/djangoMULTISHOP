@@ -12,18 +12,21 @@
                         {% load mptt_tags %}
                         <ul>
                             {% recursetree category %}
-                            <li class="right-menu"><a href="shop-left-sidebar.html">{{ node.title }}</a>
-                                 {% if not node.is_leaf_node %}
-                                <ul class="cat-mega-menu">
-                                    <li class="right-menu cat-mega-title">
-                                        <a href="shop-left-sidebar.html">Sub Category</a>
-                                        <ul>
-                                            <li><a href="#">{{ children }}</a></li>
+                                <li class="right-menu"><a
+                                        href="{% url 'category_product' id=node.id slug=node.slug %}">{{ node.title }}</a>
+                                    {% if not node.is_leaf_node %}
+                                        <ul class="cat-mega-menu">
+                                            <li class="right-menu cat-mega-title">
+                                                <a href="">Sub Category</a>
+                                                <ul>
+                                                    <li>
+                                                        <a href="{% url 'category_product' id=node.id slug=node.slug %}">{{ children }}</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
                                         </ul>
-                                    </li>
-                                </ul>
-                                {% endif %}
-                            </li>
+                                    {% endif %}
+                                </li>
                             {% endrecursetree %}
                         </ul>
                     </div>
