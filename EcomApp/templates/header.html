@@ -1,5 +1,8 @@
 {% load static %}
 <!-- Begin Header Area -->
+{% load ecomtag %}
+{% ecom_cat as category %}
+{% ecom_set as setting %}
 <header class="li-header-4">
     <!-- Begin Header Top Area -->
     <div class="header-top">
@@ -24,11 +27,12 @@
                                 <div class="setting ht-setting">
                                     <ul class="ht-setting-list">
                                         {% if user.id is not None %}
-                                            <li><a href="login-register.html">Hi {{ request.user.username }}</a></li>
+                                            <li><a href="{% url 'userprofile' %}">Hi {{ request.user.username }}</a></li>
                                             <li><a href="{% url 'logout' %}">Logout</a></li>
                                             <li><a href="checkout.html">Checkout</a></li>
                                         {% else %}
-                                            <li><a href="{% url 'login' %}">SignIn / SignUp</a></li>
+                                            <li><a href="{% url 'login' %}">Login</a></li>
+                                            <li><a href="{% url 'register' %}">Register</a></li>
                                         {% endif %}
                                     </ul>
                                 </div>
@@ -87,20 +91,20 @@
                     <!-- Begin Header Middle Searchbox Area -->
                     <form action="{% url 'SearchView' %}" class="hm-searchbox" method="POST">
                         {% csrf_token %}
-                        <select name="cat_id" class="nice-select select-search-category">
-                            <option value="0">All</option>
-                            {% load mptt_tags %}
-                            {% recursetree category %}
-                                {% if node.is_leaf_node %}
-                                    <option value="{{ node.id }}">{{ node.title }}</option>
-                                {% endif %}
-                                {% if not node.is_leaf_node %}
-                                    <optgroup label="{{ node.title }}">
-                                        {{ children }}
-                                    </optgroup>
-                                {% endif %}
-                            {% endrecursetree %}
-                        </select>
+{#                        <select name="cat_id" class="nice-select select-search-category">#}
+{#                            <option value="0">All</option>#}
+{#                            {% load mptt_tags %}#}
+{#                            {% recursetree category %}#}
+{#                                {% if node.is_leaf_node %}#}
+{#                                    <option value="{{ node.id }}">{{ node.title }}</option>#}
+{#                                {% endif %}#}
+{#                                {% if not node.is_leaf_node %}#}
+{#                                    <optgroup label="{{ node.title }}">#}
+{#                                        {{ children }}#}
+{#                                    </optgroup>#}
+{#                                {% endif %}#}
+{#                            {% endrecursetree %}#}
+{#                        </select>#}
                         <input type="text" placeholder="Enter your search key ..." id="query"
                                name="query">
                         <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
@@ -150,7 +154,7 @@
                                            class="li-button li-button-fullwidth li-button-dark">
                                             <span>View Full Cart</span>
                                         </a>
-                                        <a href="checkout.html" class="li-button li-button-fullwidth">
+                                        <a href="{% url 'order_cart' %}" class="li-button li-button-fullwidth">
                                             <span>Checkout</span>
                                         </a>
                                     </div>
@@ -170,14 +174,12 @@
     <div class="header-bottom header-sticky d-none d-lg-block d-xl-block">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-12" style="display: flex; justify-content: center; align-content: center">
                     <!-- Begin Header Bottom Menu Area -->
                     <div class="hb-menu">
                         <nav>
                             <ul>
-                                <li><a href="{% url 'home' %}">Home</a>
-
-                                </li>
+                                <li><a href="{% url 'home' %}">Home</a></li>
                                 <li class="megamenu-holder"><a href="shop-left-sidebar.html">Shop</a>
                                     <ul class="megamenu hb-megamenu">
                                         <li><a href="shop-left-sidebar.html">Shop Page Layout</a>

@@ -1,0 +1,130 @@
+{% extends 'index.html' %}
+{% load static %}
+
+
+{% block title %}
+    User Comment
+
+{% endblock title %}
+
+
+
+{% block description %}
+    {{ setting.description }}
+
+{% endblock description %}
+
+
+{% block keyword %}
+
+{% endblock keyword %}
+
+
+
+{% block header %}
+    {% include "header.html" %}
+{% endblock header %}
+
+
+{% block another_content %}
+
+    <div id="breadcrum">
+        <div class="container">
+            <div>
+                <ul class="breadcrumb">
+                    <li><a href="">Home</a></li>
+                    >>
+                    <li class="active">User Comments</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="section">
+        <div class="container">
+
+            {% if messages %}
+
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+
+
+            <div class="page-section mb-60">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-xs-12 col-lg-3 mb-30">
+                            <h1 class="font-weight-bold">User Panel</h1>
+                            <div class="aside">
+                                <ul class="list-links">
+                                    <li><a href="{% url 'userprofile' %}">User Profile</a></li>
+                                    <li><a href="{% url 'orderlist' %}">My Orders</a></li>
+                                    <li><a href="{% url 'orderproduct' %}">My Order Product</a></li>
+                                    <li><a href="{% url 'user_comments' %}">My Comments</a></li>
+                                    <li><a href="">My Favorites</a></li>
+                                    <li><a href="">My Products</a></li>
+                                    <li><a href="">Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-9 col-xs-12">
+                            <h1 class="text-center font-weight-bold">User Comments</h1>
+                            <table class="shopping-cart-table table">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Item Image</th>
+                                    <th class="text-center">Product Name</th>
+                                    <th class="text-center">Comment Title</th>
+                                    <th class="text-center">Comment</th>
+                                    <th class="text-center">Comment Status</th>
+                                    <th class="text-center">Comment Date</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for c in comment %}
+                                    <tr>
+                                        <td class="thumb text-center"><a href=""><img src="{{ c.product.ImageURL }}"
+                                                                                      alt=""
+                                                                                      height="30px"></a></td>
+                                        <td class="text-center"><a href="">{{ c.product.title }}</a></td>
+                                        <td class="text-center">{{ c.subject }}</td>
+                                        <td class="price text-center">{{ c.subject }}</td>
+                                        <td class="status text-center">{{ c.comment }}</td>
+                                        <td class="status text-center">{{ c.status }}</td>
+                                        <td class="created text-center">{{ c.crated_at }}</td>
+                                        <td class="pull-right">
+                                            <button class="btn btn-danger">
+                                                <a href="{% url 'comment_delete' id=c.id %}"
+                                                   onclick="return confirm('Are You sure delete your comment?')">
+                                                    Delete
+                                                </a>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock another_content %}
+
+{% block footer %}
+
+    {% include "footer.html" %}
+
+{% endblock footer %}

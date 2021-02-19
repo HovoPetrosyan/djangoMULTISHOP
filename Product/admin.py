@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Product.models import Category, Product, Images
+from Product.models import Category, Product, Images, Comment, Stock
 from mptt.admin import DraggableMPTTAdmin
 
 
@@ -42,7 +42,6 @@ class CategoryAdmin(DraggableMPTTAdmin):
     related_products_cumulative_count.short_description = 'Related products (in tree)'
 
 
-
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Images)
 
@@ -53,13 +52,30 @@ class productImageInline(admin.TabularInline):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'status', 'crated_at', 'updated_at', 'image_tag']
+    list_display = ['title', 'status', 'stock', 'crated_at', 'updated_at', 'image_tag']
     list_filter = ['title', 'crated_at']
     list_per_page = 10
-    search_fields = ['title', 'new_price', 'detail']
+    search_fields = ['title', 'new_price', 'stock', 'detail']
     prepopulated_fields = {'slug': ('title',)}
     inlines = (productImageInline,)
     save_on_top = True
 
 
 admin.site.register(Product, ProductAdmin)
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ['product', 'status', 'crated_at', 'updated_at', 'user']
+    list_filter = ['status', 'crated_at']
+    list_per_page = 10
+
+
+class StockAdmin(admin.ModelAdmin):
+    list_display = ['title', 'crated_at', 'updated_at']
+    list_filter = ['title']
+    list_per_page = 10
+
+
+admin.site.register(Stock, StockAdmin)
+
+admin.site.register(Comment, CommentAdmin)

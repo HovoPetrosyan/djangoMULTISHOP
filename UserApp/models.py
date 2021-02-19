@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 
-
 # Create your models here.
 from django.utils.safestring import mark_safe
 
@@ -24,3 +23,9 @@ class UserProfile(models.Model):
         return mark_safe('<img src="{}" heights="70" width="60" />'.format(self.image.url))
 
     image_tag.short_description = 'Image'
+
+    def ImageURL(self):
+        if self.image:
+            return self.image.url
+        else:
+            return ""

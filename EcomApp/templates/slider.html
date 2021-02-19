@@ -9,6 +9,9 @@
                         <h2 class="categories-toggle"><span>categories</span></h2>
                     </div>
                     <div id="cate-toggle" class="category-menu-list">
+                        {% load ecomtag %}
+                        {% ecom_cat as category %}
+                        {% ecom_set as setting %}
                         {% load mptt_tags %}
                         <ul>
                             {% recursetree category %}

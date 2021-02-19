@@ -22,7 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("EcomApp.urls")),
     path('order/', include("OrderApp.urls")),
-    path('user/', include("UserApp.urls")),
+    path('user/', include("Product.urls")),
+    path('product/', include("UserApp.urls")),
 ]
 
 if settings.DEBUG:
